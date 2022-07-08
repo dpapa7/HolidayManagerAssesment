@@ -1,0 +1,81 @@
+
+#Holiday Class
+class Holiday:
+
+    def __init__(self, name, date ):
+        print("Initializing a Holiday")
+        self.name = name
+        self.date = date
+
+        @property
+        def name(self):
+            return self.__name
+     
+        @name.setter
+        def name(self, new_name):
+            self.__name = new_name
+
+        @property 
+        def date(self):
+            return self.__date
+
+        @date.setter
+        def date(self, new_date):
+            self.__date = new_date
+
+
+newyears = Holiday("new years", "01-01-2022")
+
+x = newyears.name()
+print(x)
+
+
+# stillgoing = True
+
+# while stillgoing:
+
+#     print("Holiday Menu \n============ \n1. Add a holday \n2. Remove a Holiday \n3. Save Holiday List \n4. View Holidays \n5. Exit ")
+#     choice = int(input("Your choice: "))
+    
+
+    
+#     #Add a Holiday
+#     if choice == 1:
+#         pass
+
+
+#     #Remove a Holiday
+#     elif choice == 2:
+#         pass
+
+#     #Save Holiday List
+#     elif choice == 3:
+#         pass
+
+#     #View Holidays    
+#     elif choice == 4:
+#         pass
+
+
+#     #Exit
+#     elif choice == 5:
+#         print("Exit \n===== \nAny unsaved changes will be lost! \n")
+#         exitLoop = str(input("Are you sure you want exit? [y/n]: ").lower())
+
+
+#         if exitLoop == "y":
+#             print("\nExiting Program")
+#             stillgoing = False
+        
+#         elif exitLoop == "n":
+#             print("\nReturning to the main menu\n")
+#             restartLoop = True
+        
+#         else:
+#             print("\nInvalid Entry! \nReturning to the main menu\n")
+#             restartLoop = True
+    
+#     #Catch non valid choices
+#     else:
+#         print("That is not a valid choice. \nReturning to the main menu\n")
+#         stillgoing = True
