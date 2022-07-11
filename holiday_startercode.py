@@ -8,7 +8,8 @@ from dataclasses import dataclass
 import datetime
 
 
-
+from config import loadJsonLoc
+from config import saveJsonLoc
 
 # -------------------------------------------
 # Modify the holiday class to 
@@ -53,7 +54,7 @@ class Holiday:
         del self.__date
 
     def __str__ (self):
-        return "%s : %s" % (self.name, self.date)
+        return "%s (%s)" % (self.name, self.date)
 
         # String output
         # Holiday output when printed.
@@ -133,12 +134,13 @@ class HolidayList:
         
         with open(filelocation, "w") as f:
             tempList = []
-
+            holiday = {}
             for i in self.innerHolidays:
                 holiday = {'name':i.name, 'date':i.date}
                 tempList.append(holiday)
                 
-            json.dump(tempList, f,default=str)
+
+            json.dump(tempList, f, indent = 2, default = str)
 
         
 
@@ -176,8 +178,8 @@ class HolidayList:
                         date = date.text
                         date = f"{date} {year}"
                         date= datetime.datetime.strptime(date,"%b %d %Y")
-                        date = date.date()
-                        # .strftime('%Y-%m-%d')
+                        # date = date.date()
+                        date = date.strftime('%Y-%m-%d')
                         
                         HolidayDict['Name'] = name.text
                         HolidayDict['Date'] = date
@@ -279,9 +281,12 @@ def ValiDate(date):
 
 def main():
 
+    global loadJsonLoc
+    global saveJsonLoc
+
     mainList = HolidayList()
-    mainList.read_json('Assesments/HolidayManagerAssesment/holidays.json')
-    # mainList.scrapeHolidays()
+    mainList.read_json(loadJsonLoc)
+    mainList.scrapeHolidays()
 
     stillgoing = True
 
@@ -339,7 +344,7 @@ def main():
 
                     if save == "y":
                         print("\nSuccess:\nYour changes have been saved.")
-                        mainList.save_to_json('SavedHolidays.json')
+                        mainList.save_to_json(saveJsonLoc)
                         saveLoop = False
                     elif save == "n":
                         print("\nCanceled:\nHoliday list file save canceled.\n")
@@ -370,7 +375,7 @@ def main():
                         weekCheck = True
                     else:
                         try:
-                            wk =int(wk)
+                            wk = int(wk)
                             weekCheck = True
                         
                         except:
